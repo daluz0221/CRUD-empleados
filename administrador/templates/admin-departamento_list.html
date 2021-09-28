@@ -1,0 +1,67 @@
+{% extends 'admin.html' %}
+
+
+
+{% block admin %}
+
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre del departamento</th>
+            <th scope="col">Cantidad de empleados</th>
+            <th scope="col">Fecha creación</th>
+            <th scope="col">Fecha actualización</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for departamento in obj %}
+          <tr>
+            <th scope="row">{{ departamento.id }}</th>
+            <td>{{ departamento.name }}</td>
+            <td>{{ departamento.dp.all.count}}</td>
+            <td>{{ departamento.created|date:"d/m/Y" }}</td>
+            <td>{{ departamento.updated|date:"d/m/Y" }}</td>
+            <td>
+                {% if user.is_authenticated %}
+                <a href="{% url 'administrador:admin-departamento_edit' departamento.id %}" style="color: #000;"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'administrador:admin-dpto_del' departamento.id %}" style="color: #000;"><i class="fa-solid fa-trash-can"></i></a>
+                {% else %}
+                <a href="{% url 'administrador:departamento_detalle' departamento.id %}" class="btn btn-warning text-white">Ver más</a>
+                {% endif %}
+            </td>
+          </tr>
+    
+        {% endfor %}
+        </tbody>
+      </table>
+
+      {% if is_paginated %}
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+          <li class="page-item" ><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+          {% for page in paginator.page_range %}
+          <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+
+      {% endif %}
+
+      {% if not user.is_authenticated %}
+      <div>
+        <h3>Nota</h3>
+        <p>Para crear, actualizar o eliminar algun departamento debe estar debidamete autenticado</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock  %}

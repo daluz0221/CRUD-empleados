@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+    <h2>{{ obj.name }}</h2>
+    <p>{{ obj.description }}</p>
+
+    <div style="position: absolute;top: 85%;left: 85%;">
+        <a href="{% url 'administrador:departamentos_list' %}" class="btn btn-danger">Regresar</a>
+    </div>
+</div>
+
+{% endblock %}

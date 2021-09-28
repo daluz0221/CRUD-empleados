@@ -1,0 +1,66 @@
+{% extends 'home.html' %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="container mt-5" style="height: 100vh;">
+    <table class="table">
+        <thead>
+          <tr>
+           
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Departamento</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        {% for empleado in obj %}
+          <tr>
+            
+            <td>{{ empleado.name }}</td>
+            <td>{{ empleado.last_name }}</td>
+            <td>{{ empleado.age }} años</td>
+            <td>{{ empleado.city }}</td>
+            <td>{{ empleado.department }}</td>
+            
+              
+          </tr>
+    
+        {% endfor %}
+        </tbody>
+      </table>
+
+      {% if is_paginated %}
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+          <li class="page-item" ><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+          {% for page in paginator.page_range %}
+          <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+          {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+
+      {% endif %}
+
+      {% if not user.is_authenticated %}
+      <div>
+        <h3>Nota</h3>
+        <p>Para crear, actualizar o eliminar algun empleado debe estar debidamete autenticado</p>
+    </div>
+    {% endif %}
+    </div>
+
+{% endblock %}

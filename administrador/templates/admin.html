@@ -1,0 +1,104 @@
+{% extends 'home.html' %}
+{% block styles %}
+
+<style>
+
+.bg-per{
+    background: rgb(5, 5, 131);
+}
+
+#titulo{
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    padding: .7rem;
+}
+
+.box{
+    
+    border-radius: .5rem;
+    box-shadow: 0 .5rem .5rem rgba(0, 0, 0, .7);
+    background: #44e;
+    margin: .5rem;
+    margin-top: 3.5rem;
+}
+
+.box h3{
+    color: #fff;
+    padding-top: .5rem;
+    padding-left: .5rem;
+    font-size: 1.3rem;
+}
+
+.box ul li a{
+    font-size: .7rem;
+    padding: .4rem;
+    color: #fff;
+}
+
+.box ul li a:hover{
+    color: coral;
+}
+
+#conte h3{
+    position: relative;
+    top: 42%;
+    left: 13%;
+    color: #22e;
+    
+}
+
+.cart-ew{
+        
+        margin: auto;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div style="display: flex; align-items: center; justify-content: center;">
+
+   
+        <div class="bg-per " style="height: 100vh; width: 20%;">
+            <h2 id="titulo">Administración del sitio</h2>
+            <hr>
+            
+            <div class="box">
+                <h3>Empleados</h3>
+                <ul style="list-style: none;">
+                    <li><a href="{% url 'administrador:admin-empleados_list' %}">Ver empleados</a></li>
+                    <li><a href="{% url 'administrador:admin-empleados_new' %}">Crear un nuevo empleado</a></li>
+                    <li><a href="{% url 'administrador:admin-empleados_editSearch' %}">Editar empleado</a></li>
+                    
+                </ul>
+            </div>
+            
+            <div class="box">
+                <h3>Departamentos</h3>
+                <ul style="list-style: none;">
+                    <li><a href="{% url 'administrador:admin-departamento_list' %}">Ver Departamentos</a></li>
+                    <li><a href="{% url 'administrador:admin-departamento_new' %}">Crear un nuevo Departamento</a></li>
+                    <li><a href="{% url 'administrador:admin-departamento_editsearch' %}">Editar Departamento</a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    
+        <div id="conte" style="height: 100vh;background: #eee;width: 100%;">
+        {% block admin %}
+        <h3>Seleciona una de las opciones del menú lateral para comenzar</h3>
+        {% endblock  %}
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}
